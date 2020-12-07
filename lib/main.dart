@@ -51,9 +51,7 @@ class _HomePageState extends State<HomePage> {
         child: Icon(Icons.add),
         onPressed: () async {
           final grocery = await Navigator.of(context).push(GroceryFlow.route());
-          setState(() {
-            groceryList.add(grocery);
-          });
+          setState(() => groceryList.add(grocery));
         },
       ),
     );
