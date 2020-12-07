@@ -17,7 +17,7 @@ class GroceryFlow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const FlowBuilder<Grocery>(
+    return FlowBuilder<Grocery>(
       state: Grocery(),
       onGeneratePages: onGenerateGroceryPages,
     );
@@ -33,20 +33,15 @@ class _GroceryNameFormState extends State<GroceryNameForm> {
   var _name = '';
 
   void _continuePressed() {
-    context.flow<Grocery>().update((profile) => profile.copyWith(name: _name));
+    context.flow<Grocery>().update((profile) {
+      return profile.copyWith(name: _name);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(
-          onPressed: () => context
-              .flow<Grocery>()
-              .complete((profile) => profile.copyWith(name: _name)),
-        ),
-        title: const Text('Name'),
-      ),
+      appBar: AppBar(title: const Text('Name')),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -125,9 +120,9 @@ class _GroceryPriceFormState extends State<GroceryPriceForm> {
   int _price;
 
   void _continuePressed() {
-    context
-        .flow<Grocery>()
-        .complete((profile) => profile.copyWith(price: _price));
+    context.flow<Grocery>().complete((profile) {
+      return profile.copyWith(price: _price);
+    });
   }
 
   @override
